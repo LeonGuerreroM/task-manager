@@ -1,0 +1,23 @@
+version: "3.3"
+
+services:
+  mysql:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin1234
+      - MYSQL_DATABASE=tasks_database
+      - MYSQL_USER=nextline_admin
+      - MYSQL_PASSWORD=admin1234
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+    ports:
+      - 8080:80
+    links:
+      - mysql
